@@ -2,7 +2,10 @@ const mongoose = require('mongoose')
 
 const authorSchema = mongoose.Schema (
     {
-        name: {type: String, required: [true, 'please enter the autho\'s name']}
+        name: {type: String, required: [true, 'please enter the author\'s name']}
+    },
+    {
+        nationality: {type: String, required: [true, 'please enter the author\'s nationality']}
     },
     {
         timestamps: true

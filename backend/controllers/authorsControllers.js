@@ -21,7 +21,37 @@ const setAuthor = asyncHandler(async (req, res) => {
     res.status(200).json(author)
 })
 
+const updateAuthor = asyncHandler(async (req, res) => {
+    const author = await Author.findById(req.params.id)
+    if(!author){
+        res.status(400)
+        throw new Error('Author not found')
+    }
+
+    const updateAuthor = await Author.findByIdAndUpdate(req.params.id, req.body, {
+        new : true,
+    })
+
+    res.status(200).json(updateAuthor)
+})
+
+const deleteAuthor = asyncHandler(async (req, res) => {
+    const author = await Author.findById(req.params.id)
+
+    if(!author){
+        res.status(400)
+        throw new Error('Author not found')
+    }
+
+    // await goal.remove()
+    const deleteAuthor = await Author.findByIdAndDelete(req.params.id)
+
+    res.status(200).json({id: req.params.id})
+})
+
 module.exports = {
     getAuthor,
-    setAuthor
+    setAuthor,
+    updateAuthor,
+    deleteAuthor
 }
